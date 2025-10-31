@@ -89,7 +89,8 @@
         <div class="disclaimer-inner">
             <h2>Disclaimer</h2>
             <p>
-                The content on <strong>Heartinjapanblog</strong> is provided for <strong>general informational and entertainment
+                The content on <strong>Heartinjapanblog</strong> is provided for <strong>general informational and
+                    entertainment
                     purposes only</strong>.
                 All articles, guides, and opinions published on this site are based on the author's experience and
                 research and are not intended
@@ -102,7 +103,8 @@
             <p>
                 We strive to keep information accurate and up to date, but we make no warranties or guarantees about the
                 completeness,
-                accuracy, reliability, suitability, or availability of the information contained on Heartinjapanblog. Any reliance
+                accuracy, reliability, suitability, or availability of the information contained on Heartinjapanblog.
+                Any reliance
                 you place on such information
                 is strictly at your own risk. We reserve the right to modify, update, or remove content at any time
                 without prior notice.
@@ -110,7 +112,8 @@
 
             <h3>Ads, Monetization & Affiliate Links</h3>
             <p>
-                Heartinjapanblog is monetized through advertising, including Google Ads. We may also use affiliate links in some
+                Heartinjapanblog is monetized through advertising, including Google Ads. We may also use affiliate links
+                in some
                 articles. This means
                 we may earn a small commission if you click a link and make a purchase — at no extra cost to you. We
                 only recommend products,
@@ -140,7 +143,8 @@
 
             <h3>Copyright & Use of Content</h3>
             <p>
-                All original content on Heartinjapanblog is protected by copyright. You may share short excerpts (with attribution
+                All original content on Heartinjapanblog is protected by copyright. You may share short excerpts (with
+                attribution
                 and a link back to the article),
                 but you may not republish, redistribute, or use large portions of our content without prior written
                 permission. To request permission,
@@ -202,18 +206,20 @@ Notes for developer:
                                     </p>
                                 </div>
 
-                                <form action="#" class="newslettre-form">
+                                <form action="subscribe.php" method="post" class="newslettre-form">
                                     <div class="form-flex">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email Adress"
-                                                required="required">
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Your Email Address" required>
                                         </div>
                                         <button class="submit-btn" type="submit">
                                             <i class="fas fa-paper-plane"></i>
-
                                         </button>
                                     </div>
                                 </form>
+
+                                <!-- Message area -->
+                                <div id="subscribe-message" style="margin-top:10px; font-weight:500;"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -235,7 +241,7 @@ Notes for developer:
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="copyright">
-                                <p>© 2022, Heartinjapanblog, All Rights Reserved.</p>
+                                <p>© 2025, Heartinjapanblog, All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>
@@ -243,6 +249,7 @@ Notes for developer:
             </div>
         </div>
     </div>
+
 
 
     <!--Search-form-->
@@ -266,6 +273,50 @@ Notes for developer:
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('.newslettre-form');
+            const messageBox = document.getElementById('subscribe-message');
+
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent reload
+
+                const formData = new FormData(form);
+
+                fetch('subscribe.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // Set color and message
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = data.status === 'success' ? 'green' : 'red';
+                        messageBox.style.opacity = '1';
+
+                        // Reset form if success
+                        if (data.status === 'success') form.reset();
+
+                        // Hide message after 3 seconds with fade
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    })
+                    .catch(() => {
+                        messageBox.textContent = 'Something went wrong. Please try again later.';
+                        messageBox.style.color = 'red';
+                        messageBox.style.opacity = '1';
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    });
+            });
+        });
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

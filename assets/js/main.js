@@ -1,12 +1,12 @@
 /* -----------------------------------------------
-					Js Main
+                    Js Main
 --------------------------------------------------
     Template Name: Oredoo - Personal Blog HTML Template
 --------------------------------------------------
 
 Table of Content
 
-	. Preloader
+    . Preloader
     . Navigation
     . Search
     . Back-top
@@ -95,7 +95,7 @@ Table of Content
             },
         }
     });
-    
+
     /* -----------------------------------
        blog-home3
     -----------------------------------*/
@@ -104,7 +104,7 @@ Table of Content
         stagePadding: 5,
         margin: 30,
         nav: true,
-        autoplay:true,
+        autoplay: true,
         center: false,
         dots: false,
         mouseDrag: true,
@@ -116,7 +116,7 @@ Table of Content
             0: {
                 items: 1,
             },
-           990: {
+            990: {
                 items: 2,
             },
             1400: {
@@ -134,7 +134,7 @@ Table of Content
         stagePadding: 5,
         margin: 30,
         nav: true,
-        autoplay:true,
+        autoplay: true,
         center: false,
         dots: false,
         mouseDrag: true,
@@ -155,15 +155,15 @@ Table of Content
             },
         }
     });
-        /* -----------------------------------
-       blog-home4
-    -----------------------------------*/
+    /* -----------------------------------
+   blog-home4
+-----------------------------------*/
     $(".blog-home7 .owl-carousel").owlCarousel({
         loop: true,
         stagePadding: 5,
         margin: 30,
         nav: true,
-        autoplay:true,
+        autoplay: true,
         center: false,
         dots: true,
         mouseDrag: true,
@@ -192,10 +192,10 @@ Table of Content
     jQuery('.oredoo-sidebar,.oredoo-content').theiaStickySidebar({
         additionalMarginTop: 150
     });
-      
-     /* -----------------------------------
-       section-scroll-marquee
-    -----------------------------------*/
+
+    /* -----------------------------------
+      section-scroll-marquee
+   -----------------------------------*/
     $('.section-scroll-marquee').each(function () {
         let $this = $(this),
             title = $this.find('.page-title'),
@@ -211,8 +211,6 @@ Table of Content
             startVisible: true
         });
     })
-     
+
 
 })(jQuery);
-
-

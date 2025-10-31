@@ -32,7 +32,8 @@
             color: #ff3b2e;
             font-weight: bolder;
         }
-        li{
+
+        li {
             margin: 10px;
             font-weight: bold;
         }
@@ -175,7 +176,8 @@
 
                                 This makes it easier to start conversations naturally — without awkward pickup lines.
                                 It’s a great place to experience modern flirting, Japanese-style, where connection often
-                                grows slowly, as described in <a href="Why-first-dates-in-japan-are-so-quiet.html">why first
+                                grows slowly, as described in <a href="Why-first-dates-in-japan-are-so-quiet.html">why
+                                    first
                                     dates in Japan are so quiet</a>.</p>
                             <h5>3. Omiai (お見合い)</h5>
                             <p>If Pairs is for serious daters, Omiai takes it a step further. The name literally means
@@ -188,7 +190,8 @@
 
                                 The quiet, respectful tone of most users reflects Japan’s traditional values — a style
                                 of connection that’s deeply tied to the emotional honesty behind <a
-                                    href="Love-etiquette-what-to-text-after-a-date.html">love etiquette</a> in Japan.</p>
+                                    href="Love-etiquette-what-to-text-after-a-date.html">love etiquette</a> in Japan.
+                            </p>
                             <h5>4. Bumble</h5>
                             <p>Bumble has been steadily gaining ground in Japan because of its unique twist — women make
                                 the first move. For many Japanese users, this feels empowering yet balanced. <br>
@@ -212,7 +215,8 @@
                                 Still, it’s important to remember that many Japanese users prefer to take things slow.
                                 If you match with someone, don’t expect instant meetups — instead, use respectful, kind
                                 messaging. A thoughtful message (like the ones in <a
-                                    href="Love-etiquette-what-to-text-after-a-date.html">what to text after a date</a>) goes
+                                    href="Love-etiquette-what-to-text-after-a-date.html">what to text after a date</a>)
+                                goes
                                 a long way here.
                             </p>
                             <div class="image-groupe">
@@ -238,7 +242,8 @@
                                 </li>
                             </ul>
                             <p>These behaviors reflect the same calm and cautious energy seen in <a
-                                    href="Why-first-dates-in-japan-are-so-quiet.html">Japan’s first date culture</a> — where
+                                    href="Why-first-dates-in-japan-are-so-quiet.html">Japan’s first date culture</a> —
+                                where
                                 silence and subtlety often speak louder than words.</p>
 
                             <div class="quote">
@@ -306,8 +311,7 @@
                                 A few well-chosen words or a kind message can mean far more than flashy compliments.
                                 Once you start meeting people offline, you’ll also experience Japan’s unique dating
                                 rhythm — from the gentle <a href="Why-first-dates-in-japan-are-so-quiet.html">first
-                                    dates</a> to the defining moment of <a
-                                    href="What-kokuhaku-means.html">kokuhaku</a>.
+                                    dates</a> to the defining moment of <a href="What-kokuhaku-means.html">kokuhaku</a>.
                             </p>
                             <h4>Final Thoughts</h4>
                             <p>In 2025, dating apps in Japan aren’t just digital tools — they’re emotional bridges.
@@ -436,7 +440,7 @@
 
 
 
-    <!--footer-->
+<!--footer-->
     <div class="footer">
         <div class="footer-area">
             <div class="footer-area-content">
@@ -462,18 +466,20 @@
                                     </p>
                                 </div>
 
-                                <form action="#" class="newslettre-form">
+                                <form action="subscribe.php" method="post" class="newslettre-form">
                                     <div class="form-flex">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email Adress"
-                                                required="required">
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Your Email Address" required>
                                         </div>
                                         <button class="submit-btn" type="submit">
                                             <i class="fas fa-paper-plane"></i>
-
                                         </button>
                                     </div>
                                 </form>
+
+                                <!-- Message area -->
+                                <div id="subscribe-message" style="margin-top:10px; font-weight:500;"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -495,7 +501,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="copyright">
-                                <p>© 2022, Heartinjapanblog, All Rights Reserved.</p>
+                                <p>© 2025, Heartinjapanblog, All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>
@@ -503,6 +509,7 @@
             </div>
         </div>
     </div>
+
 
     <!--Back-to-top-->
     <div class="back">
@@ -533,6 +540,50 @@
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('.newslettre-form');
+            const messageBox = document.getElementById('subscribe-message');
+
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent reload
+
+                const formData = new FormData(form);
+
+                fetch('subscribe.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // Set color and message
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = data.status === 'success' ? 'green' : 'red';
+                        messageBox.style.opacity = '1';
+
+                        // Reset form if success
+                        if (data.status === 'success') form.reset();
+
+                        // Hide message after 3 seconds with fade
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    })
+                    .catch(() => {
+                        messageBox.textContent = 'Something went wrong. Please try again later.';
+                        messageBox.style.color = 'red';
+                        messageBox.style.opacity = '1';
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    });
+            });
+        });
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

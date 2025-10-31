@@ -27,6 +27,7 @@
             color: #ff6f61;
             font-weight: bold;
         }
+
         a:hover {
             color: #ff3b2e;
             font-weight: bolder;
@@ -199,7 +200,8 @@
 
                                 In a culture that values emotional control, being too forward might seem disrespectful
                                 or awkward. So, restraint isn’t a lack of interest — it’s a sign of respect. This is
-                                also why <a href="Why-first-dates-in-japan-are-so-quiet.html">first dates in Japan are often
+                                also why <a href="Why-first-dates-in-japan-are-so-quiet.html">first dates in Japan are
+                                    often
                                     so quiet</a> — they’re about creating calm, comfortable spaces rather than chasing
                                 excitement.
                             </p>
@@ -227,7 +229,8 @@
                                 It’s not manipulation; it’s a way to build intimacy through trust and vulnerability. In
                                 Japanese dating culture, these moments often carry far more emotional weight than any
                                 verbal flirtation. You might see more of this in the messages people exchange — part of
-                                Japan’s unique <a href="Love-etiquette-what-to-text-after-a-date.html">love etiquette and
+                                Japan’s unique <a href="Love-etiquette-what-to-text-after-a-date.html">love etiquette
+                                    and
                                     texting culture after a date</a>.
                             </p>
                             <h4> Why Subtle Flirting Works </h4>
@@ -305,7 +308,8 @@
                                                         class="las la-arrow-left"></i>Previous post</a></small>
 
                                             <p>
-                                                <a href="How-japanese-people-flirt.html">How Japanese People Flirt (It’s Not What You Think!)</a>
+                                                <a href="How-japanese-people-flirt.html">How Japanese People Flirt (It’s
+                                                    Not What You Think!)</a>
                                             </p>
                                         </div>
                                     </div>
@@ -325,7 +329,8 @@
                                             <small> <a href="What-kokuhaku-means.html">Next post <i
                                                         class="las la-arrow-right"></i></a> </small>
                                             <p>
-                                                <a href="What-kokuhaku-means.html">What ‘Kokuhaku’ Means — And Why It’s So Important</a>
+                                                <a href="What-kokuhaku-means.html">What ‘Kokuhaku’ Means — And Why It’s
+                                                    So Important</a>
                                             </p>
                                         </div>
                                     </div>
@@ -427,18 +432,20 @@
                                     </p>
                                 </div>
 
-                                <form action="#" class="newslettre-form">
+                                <form action="subscribe.php" method="post" class="newslettre-form">
                                     <div class="form-flex">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email Adress"
-                                                required="required">
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Your Email Address" required>
                                         </div>
                                         <button class="submit-btn" type="submit">
                                             <i class="fas fa-paper-plane"></i>
-
                                         </button>
                                     </div>
                                 </form>
+
+                                <!-- Message area -->
+                                <div id="subscribe-message" style="margin-top:10px; font-weight:500;"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -460,7 +467,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="copyright">
-                                <p>© 2022, Heartinjapanblog, All Rights Reserved.</p>
+                                <p>© 2025, Heartinjapanblog, All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>
@@ -468,6 +475,7 @@
             </div>
         </div>
     </div>
+
 
     <!--Back-to-top-->
     <div class="back">
@@ -498,6 +506,50 @@
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('.newslettre-form');
+            const messageBox = document.getElementById('subscribe-message');
+
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent reload
+
+                const formData = new FormData(form);
+
+                fetch('subscribe.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // Set color and message
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = data.status === 'success' ? 'green' : 'red';
+                        messageBox.style.opacity = '1';
+
+                        // Reset form if success
+                        if (data.status === 'success') form.reset();
+
+                        // Hide message after 3 seconds with fade
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    })
+                    .catch(() => {
+                        messageBox.textContent = 'Something went wrong. Please try again later.';
+                        messageBox.style.color = 'red';
+                        messageBox.style.opacity = '1';
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    });
+            });
+        });
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

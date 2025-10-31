@@ -175,7 +175,8 @@
                                 too many emojis, writing late at night, or using slang that feels too relaxed. <br>
 
                                 It’s better to follow love etiquette, like the rules explained in <a
-                                    href="Love-etiquette-what-to-text-after-a-date.html">what to text after a date</a>. A
+                                    href="Love-etiquette-what-to-text-after-a-date.html">what to text after a date</a>.
+                                A
                                 polite “Thank you for today” or “I had a nice time” goes much further than a dozen heart
                                 emojis.
                             </p>
@@ -199,8 +200,8 @@
                                 In Japan, it’s not about how fast love starts — it’s about how stable it becomes. <br>
 
                                 The defining step of commitment often comes through kokuhaku — the heartfelt confession
-                                of love, which you can read more about in <a
-                                    href="What-kokuhaku-means.html">what ‘Kokuhaku’ means — and why
+                                of love, which you can read more about in <a href="What-kokuhaku-means.html">what
+                                    ‘Kokuhaku’ means — and why
                                     it’s so important</a>.</p>
                             <h4>Ignoring Cultural Nuances</h4>
                             <p>Dating in Japan comes with unique expectations — like being punctual, showing gratitude,
@@ -279,7 +280,8 @@
                                 after trust is built. <br>
 
                                 This patience reflects the same respectful energy found in traditional Japanese dating
-                                customs like <a href="Why-first-dates-in-japan-are-so-quiet.html">quiet first dates</a> and
+                                customs like <a href="Why-first-dates-in-japan-are-so-quiet.html">quiet first dates</a>
+                                and
                                 meaningful <a href="What-kokuhaku-means.html">kokuhaku</a>
                                 confessions.</p>
                             <h4>Forgetting That “Less Is More</h4>
@@ -301,7 +303,8 @@
                                 <li>Show effort — language, culture, and manners matter.</li>
                                 <li>Let trust grow naturally — don’t rush into “defining the relationship</li>
                             </ul>
-                            <p>Once you embrace Japan’s calm, respectful pace, you’ll discover that love here feels more genuine — built on quiet understanding rather than fast emotion.</p>
+                            <p>Once you embrace Japan’s calm, respectful pace, you’ll discover that love here feels more
+                                genuine — built on quiet understanding rather than fast emotion.</p>
                         </div>
 
 
@@ -442,22 +445,24 @@
                                 <div class="newslettre-info">
                                     <h3>Subscribe To Our
                                         Newsletter</h3>
-                                    <p>Get the latest stories on dating and romance in Japan straight to your inbox.
+                                    <p>Get the latest stories on dating and romance in Japan — straight to your inbox.
                                     </p>
                                 </div>
 
-                                <form action="#" class="newslettre-form">
+                                <form action="subscribe.php" method="post" class="newslettre-form">
                                     <div class="form-flex">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email Adress"
-                                                required="required">
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Your Email Address" required>
                                         </div>
                                         <button class="submit-btn" type="submit">
                                             <i class="fas fa-paper-plane"></i>
-
                                         </button>
                                     </div>
                                 </form>
+
+                                <!-- Message area -->
+                                <div id="subscribe-message" style="margin-top:10px; font-weight:500;"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -479,7 +484,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="copyright">
-                                <p>© 2022, Heartinjapanblog, All Rights Reserved.</p>
+                                <p>© 2025, Heartinjapanblog, All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>
@@ -487,6 +492,7 @@
             </div>
         </div>
     </div>
+
 
     <!--Back-to-top-->
     <div class="back">
@@ -517,6 +523,50 @@
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('.newslettre-form');
+            const messageBox = document.getElementById('subscribe-message');
+
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent reload
+
+                const formData = new FormData(form);
+
+                fetch('subscribe.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // Set color and message
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = data.status === 'success' ? 'green' : 'red';
+                        messageBox.style.opacity = '1';
+
+                        // Reset form if success
+                        if (data.status === 'success') form.reset();
+
+                        // Hide message after 3 seconds with fade
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    })
+                    .catch(() => {
+                        messageBox.textContent = 'Something went wrong. Please try again later.';
+                        messageBox.style.color = 'red';
+                        messageBox.style.opacity = '1';
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    });
+            });
+        });
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

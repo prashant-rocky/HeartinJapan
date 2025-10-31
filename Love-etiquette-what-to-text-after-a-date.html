@@ -238,7 +238,8 @@
                                 Patience, in this case, shows maturity. <br>
 
                                 This quiet, thoughtful rhythm of communication is similar to the pacing of <a
-                                    href="Why-first-dates-in-japan-are-so-quiet.html">Japanese first dates</a> — it’s about
+                                    href="Why-first-dates-in-japan-are-so-quiet.html">Japanese first dates</a> — it’s
+                                about
                                 emotional timing more than speed.
                             </p>
                             <h4>Avoid Overly Romantic or Physical Messages</h4>
@@ -252,8 +253,8 @@
                                     “It was fun chatting about our favorite movies. You have great taste!”</p>
                             </div>
                             <p>Subtle, genuine compliments like these help build emotional trust, which is essential
-                                before the more serious stage of <a
-                                    href="What-kokuhaku-means.html">kokuhaku</a> — the romantic
+                                before the more serious stage of <a href="What-kokuhaku-means.html">kokuhaku</a> — the
+                                romantic
                                 confession that defines Japanese relationships.</p>
                             <div class="image-groupe">
                                 <div class="image">
@@ -284,8 +285,8 @@
                             </ul>
                             <p>Following this simple etiquette shows respect for cultural norms and makes you stand out
                                 in a positive way.
-                                It also helps you avoid the <a
-                                    href="Foreigners-biggest-mistakes.html">biggest mistakes foreigners
+                                It also helps you avoid the <a href="Foreigners-biggest-mistakes.html">biggest mistakes
+                                    foreigners
                                     make when dating in Japan</a> — especially being too direct too soon.</p>
                             <h4>When (and How) to Confess Your Feelings</h4>
                             <p>After a few dates and consistent, warm communication, there may come a moment when you’re
@@ -298,9 +299,10 @@
                                 comfort, you can gently move toward deeper honesty — but only when both sides are ready.
                                 <br>
 
-                                You can learn more about this tradition in <a
-                                    href="What-kokuhaku-means.html">what ‘Kokuhaku’ means — and why
-                                    it’s so important</a>.</p>
+                                You can learn more about this tradition in <a href="What-kokuhaku-means.html">what
+                                    ‘Kokuhaku’ means — and why
+                                    it’s so important</a>.
+                            </p>
                             <h4>The Beauty of a Simple “Thank You”</h4>
                             <p>In Japanese dating, the smallest gestures often carry the deepest meaning.
                                 Even a simple message like “Thank you for today” can speak volumes when sent with
@@ -450,22 +452,24 @@
                                 <div class="newslettre-info">
                                     <h3>Subscribe To Our
                                         Newsletter</h3>
-                                    <p>Get the latest stories on dating and romance in Japan straight to your inbox.
+                                    <p>Get the latest stories on dating and romance in Japan — straight to your inbox.
                                     </p>
                                 </div>
 
-                                <form action="#" class="newslettre-form">
+                                <form action="subscribe.php" method="post" class="newslettre-form">
                                     <div class="form-flex">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email Adress"
-                                                required="required">
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Your Email Address" required>
                                         </div>
                                         <button class="submit-btn" type="submit">
                                             <i class="fas fa-paper-plane"></i>
-
                                         </button>
                                     </div>
                                 </form>
+
+                                <!-- Message area -->
+                                <div id="subscribe-message" style="margin-top:10px; font-weight:500;"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -487,7 +491,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="copyright">
-                                <p>© 2022, Heartinjapanblog, All Rights Reserved.</p>
+                                <p>© 2025, Heartinjapanblog, All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>
@@ -495,6 +499,7 @@
             </div>
         </div>
     </div>
+
 
     <!--Back-to-top-->
     <div class="back">
@@ -525,6 +530,50 @@
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('.newslettre-form');
+            const messageBox = document.getElementById('subscribe-message');
+
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent reload
+
+                const formData = new FormData(form);
+
+                fetch('subscribe.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // Set color and message
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = data.status === 'success' ? 'green' : 'red';
+                        messageBox.style.opacity = '1';
+
+                        // Reset form if success
+                        if (data.status === 'success') form.reset();
+
+                        // Hide message after 3 seconds with fade
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    })
+                    .catch(() => {
+                        messageBox.textContent = 'Something went wrong. Please try again later.';
+                        messageBox.style.color = 'red';
+                        messageBox.style.opacity = '1';
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    });
+            });
+        });
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

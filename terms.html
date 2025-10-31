@@ -90,15 +90,18 @@
         <div class="terms-inner">
             <h2>Terms and Conditions</h2>
             <p>
-                Welcome to <strong>Heartinjapanblog</strong>! These Terms and Conditions ("Terms") govern your use of our website
-                <a href="https://heartinjapanblog.site">heartinjapanblog.site</a> (the "Site"). By accessing or using this website, you agree
+                Welcome to <strong>Heartinjapanblog</strong>! These Terms and Conditions ("Terms") govern your use of
+                our website
+                <a href="https://heartinjapanblog.site">heartinjapanblog.site</a> (the "Site"). By accessing or using
+                this website, you agree
                 to be bound by these Terms.
                 If you do not agree with any part of these Terms, please discontinue using our Site immediately.
             </p>
 
             <h3>1. Acceptance of Terms</h3>
             <p>
-                By accessing, browsing, or using Heartinjapanblog, you acknowledge that you have read, understood, and agreed to
+                By accessing, browsing, or using Heartinjapanblog, you acknowledge that you have read, understood, and
+                agreed to
                 be bound by these Terms and
                 our <a href="privacy.html">Privacy Policy</a>. If you do not agree to these Terms, please do not use
                 the Site.
@@ -106,20 +109,23 @@
 
             <h3>2. Use of Website</h3>
             <p>
-                The content on Heartinjapanblog is for general informational and entertainment purposes only. You agree to use the
+                The content on Heartinjapanblog is for general informational and entertainment purposes only. You agree
+                to use the
                 website in a lawful manner
                 and not for any illegal or unauthorized purpose. You must not:
             </p>
             <ul>
                 <li>Violate any applicable local, national, or international laws or regulations.</li>
-                <li>Copy, modify, distribute, or republish any content from Heartinjapanblog without written permission.</li>
+                <li>Copy, modify, distribute, or republish any content from Heartinjapanblog without written permission.
+                </li>
                 <li>Attempt to gain unauthorized access to our servers, data, or systems.</li>
                 <li>Use the site to spread spam, malware, or harmful content.</li>
             </ul>
 
             <h3>3. Intellectual Property Rights</h3>
             <p>
-                All content on Heartinjapanblog — including text, images, graphics, logos, videos, and design — is the property of
+                All content on Heartinjapanblog — including text, images, graphics, logos, videos, and design — is the
+                property of
                 Heartinjapanblog or its content creators
                 and is protected by copyright and intellectual property laws. You may share small excerpts of our
                 articles for non-commercial purposes
@@ -128,16 +134,19 @@
 
             <h3>4. Advertising and Affiliate Disclosure</h3>
             <p>
-                Heartinjapanblog displays third-party advertisements through <strong>Google AdSense</strong> and may include
+                Heartinjapanblog displays third-party advertisements through <strong>Google AdSense</strong> and may
+                include
                 affiliate links in certain posts.
-                Clicking on these links or ads may result in Heartinjapanblog earning a small commission, at no extra cost to you.
+                Clicking on these links or ads may result in Heartinjapanblog earning a small commission, at no extra
+                cost to you.
                 We are not responsible for the products, services, or content offered by third-party advertisers or
                 affiliates.
             </p>
 
             <h3>5. User-Generated Content</h3>
             <p>
-                If you submit comments, messages, or other materials to our website, you grant Heartinjapanblog a worldwide,
+                If you submit comments, messages, or other materials to our website, you grant Heartinjapanblog a
+                worldwide,
                 non-exclusive, royalty-free license
                 to use, reproduce, and distribute your content. You agree that your submissions will not contain
                 defamatory, offensive, or unlawful material.
@@ -154,7 +163,8 @@
 
             <h3>7. Disclaimer of Warranties</h3>
             <p>
-                All information on Heartinjapanblog is provided "as is" without any guarantees or warranties, express or implied.
+                All information on Heartinjapanblog is provided "as is" without any guarantees or warranties, express or
+                implied.
                 We do not warrant that the Site will be error-free, uninterrupted, or that any defects will be
                 corrected.
                 The information and opinions provided on this website are for general guidance only and do not
@@ -171,7 +181,8 @@
 
             <h3>9. Privacy</h3>
             <p>
-                Your use of Heartinjapanblog is also governed by our <a href="privacy.html">Privacy Policy</a>, which explains
+                Your use of Heartinjapanblog is also governed by our <a href="privacy.html">Privacy Policy</a>, which
+                explains
                 how we collect,
                 use, and protect your personal data.
             </p>
@@ -185,7 +196,8 @@
 
             <h3>11. Changes to These Terms</h3>
             <p>
-                Heartinjapanblog reserves the right to update or modify these Terms and Conditions at any time without prior
+                Heartinjapanblog reserves the right to update or modify these Terms and Conditions at any time without
+                prior
                 notice.
                 The most current version will always be posted on this page with the updated effective date.
                 Continued use of the website after any changes means you accept those modifications.
@@ -248,18 +260,20 @@ Notes:
                                     </p>
                                 </div>
 
-                                <form action="#" class="newslettre-form">
+                                <form action="subscribe.php" method="post" class="newslettre-form">
                                     <div class="form-flex">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email Adress"
-                                                required="required">
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Your Email Address" required>
                                         </div>
                                         <button class="submit-btn" type="submit">
                                             <i class="fas fa-paper-plane"></i>
-
                                         </button>
                                     </div>
                                 </form>
+
+                                <!-- Message area -->
+                                <div id="subscribe-message" style="margin-top:10px; font-weight:500;"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -281,7 +295,7 @@ Notes:
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="copyright">
-                                <p>© 2022, Heartinjapanblog, All Rights Reserved.</p>
+                                <p>© 2025, Heartinjapanblog, All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>
@@ -289,6 +303,7 @@ Notes:
             </div>
         </div>
     </div>
+
 
 
     <!--Search-form-->
@@ -312,6 +327,50 @@ Notes:
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('.newslettre-form');
+            const messageBox = document.getElementById('subscribe-message');
+
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent reload
+
+                const formData = new FormData(form);
+
+                fetch('subscribe.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // Set color and message
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = data.status === 'success' ? 'green' : 'red';
+                        messageBox.style.opacity = '1';
+
+                        // Reset form if success
+                        if (data.status === 'success') form.reset();
+
+                        // Hide message after 3 seconds with fade
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    })
+                    .catch(() => {
+                        messageBox.textContent = 'Something went wrong. Please try again later.';
+                        messageBox.style.color = 'red';
+                        messageBox.style.opacity = '1';
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    });
+            });
+        });
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

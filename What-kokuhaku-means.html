@@ -217,7 +217,8 @@
 
                                 Texting also becomes more open and romantic. Japanese people tend to follow what we call
                                 love etiquette, like polite, thoughtful texting habits explained in <a
-                                    href="Love-etiquette-what-to-text-after-a-date.html">what to text after a date</a>. <br>
+                                    href="Love-etiquette-what-to-text-after-a-date.html">what to text after a date</a>.
+                                <br>
 
                                 Instead of casual “hey” messages, you’ll see warm check-ins like “Otsukaresama” (good
                                 work today) or “Aitakatta” (I wanted to see you). These small words carry deep emotional
@@ -281,7 +282,8 @@
 
                                 When you align your approach with Japanese rhythm and customs, you show emotional
                                 intelligence and respect for the culture. That’s what makes love here so different — and
-                                so real.</p>
+                                so real.
+                            </p>
                             <h4>How to Prepare for Kokuhaku</h4>
                             <p>Here are a few simple tips if you’re planning your own kokuhaku:</p>
                             <ul>
@@ -447,22 +449,24 @@
                                 <div class="newslettre-info">
                                     <h3>Subscribe To Our
                                         Newsletter</h3>
-                                    <p>Get the latest stories on dating and romance in Japan straight to your inbox.
+                                    <p>Get the latest stories on dating and romance in Japan — straight to your inbox.
                                     </p>
                                 </div>
 
-                                <form action="#" class="newslettre-form">
+                                <form action="subscribe.php" method="post" class="newslettre-form">
                                     <div class="form-flex">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email Adress"
-                                                required="required">
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Your Email Address" required>
                                         </div>
                                         <button class="submit-btn" type="submit">
                                             <i class="fas fa-paper-plane"></i>
-
                                         </button>
                                     </div>
                                 </form>
+
+                                <!-- Message area -->
+                                <div id="subscribe-message" style="margin-top:10px; font-weight:500;"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -484,7 +488,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="copyright">
-                                <p>© 2022, Heartinjapanblog, All Rights Reserved.</p>
+                                <p>© 2025, Heartinjapanblog, All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>
@@ -492,6 +496,7 @@
             </div>
         </div>
     </div>
+
 
     <!--Back-to-top-->
     <div class="back">
@@ -522,6 +527,50 @@
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('.newslettre-form');
+            const messageBox = document.getElementById('subscribe-message');
+
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent reload
+
+                const formData = new FormData(form);
+
+                fetch('subscribe.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // Set color and message
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = data.status === 'success' ? 'green' : 'red';
+                        messageBox.style.opacity = '1';
+
+                        // Reset form if success
+                        if (data.status === 'success') form.reset();
+
+                        // Hide message after 3 seconds with fade
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    })
+                    .catch(() => {
+                        messageBox.textContent = 'Something went wrong. Please try again later.';
+                        messageBox.style.color = 'red';
+                        messageBox.style.opacity = '1';
+                        setTimeout(() => {
+                            messageBox.style.transition = 'opacity 0.5s';
+                            messageBox.style.opacity = '0';
+                        }, 3000);
+                    });
+            });
+        });
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
